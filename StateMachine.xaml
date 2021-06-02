@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="StateMachine" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="635,985" sap2010:WorkflowViewState.IdRef="StateMachine_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="StateMachine" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="632,903" sap2010:WorkflowViewState.IdRef="StateMachine_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -23,6 +23,7 @@
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -52,7 +53,6 @@
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
@@ -103,9 +103,7 @@
               </Assign.Value>
             </Assign>
           </Transition.Action>
-          <Transition.Condition>
-            <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="(dayOfBirth&lt;1 Or dayOfBirth &gt; 31) and retryCtr&lt;= 3" />
-          </Transition.Condition>
+          <Transition.Condition>[(dayOfBirth&lt;1 Or dayOfBirth &gt; 31) and retryCtr&lt;= 3]</Transition.Condition>
         </Transition>
         <Transition DisplayName="DDCorrect" sap:VirtualizedContainerService.HintSize="450,505" sap2010:WorkflowViewState.IdRef="Transition_3">
           <sap:WorkflowViewStateService.ViewState>
@@ -115,9 +113,7 @@
               <x:Int32 x:Key="DestConnectionPointIndex">46</x:Int32>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Transition.Condition>
-            <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="dayOfBirth&gt;0 And dayOfBirth &lt;= 31 And retryCtr &lt;=3" />
-          </Transition.Condition>
+          <Transition.Condition>[dayOfBirth&gt;0 And dayOfBirth &lt;= 31 And retryCtr &lt;=3]</Transition.Condition>
           <Transition.To>
             <State x:Name="__ReferenceID3" DisplayName="Month of Birth" sap:VirtualizedContainerService.HintSize="134,61" sap2010:WorkflowViewState.IdRef="State_2">
               <State.Entry>
@@ -143,9 +139,7 @@
                       <x:Int32 x:Key="DestConnectionPointIndex">34</x:Int32>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <Transition.Condition>
-                    <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="(mmOfBirth &gt; 0 And mmOfBirth &lt; 13) And retryCtr &lt;=3" />
-                  </Transition.Condition>
+                  <Transition.Condition>[(mmOfBirth &gt; 0 And mmOfBirth &lt; 13) And retryCtr &lt;=3]</Transition.Condition>
                   <Transition.To>
                     <State x:Name="__ReferenceID1" DisplayName="Year of Birth" sap:VirtualizedContainerService.HintSize="134,61" sap2010:WorkflowViewState.IdRef="State_5">
                       <State.Entry>
@@ -174,9 +168,7 @@
                           <Transition.To>
                             <x:Reference>__ReferenceID1</x:Reference>
                           </Transition.To>
-                          <Transition.Condition>
-                            <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="(yyOfBirth&lt;2000 And yyOfBirth&gt;2022) And retryCtr&lt;=3" />
-                          </Transition.Condition>
+                          <Transition.Condition>[(yyOfBirth&lt;2000 And yyOfBirth&gt;2022) And retryCtr&lt;=3]</Transition.Condition>
                         </Transition>
                         <Transition DisplayName="Ended" sap:VirtualizedContainerService.HintSize="450,505" sap2010:WorkflowViewState.IdRef="Transition_13">
                           <sap:WorkflowViewStateService.ViewState>
@@ -186,13 +178,19 @@
                               <x:Int32 x:Key="DestConnectionPointIndex">35</x:Int32>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <Transition.Condition>
-                            <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="yyOfBirth&gt;=2000 And yyOfBirth &lt;=2022" />
-                          </Transition.Condition>
+                          <Transition.Condition>[yyOfBirth&gt;=2000 And yyOfBirth &lt;=2022]</Transition.Condition>
                           <Transition.To>
-                            <State x:Name="__ReferenceID2" DisplayName="Final State" sap:VirtualizedContainerService.HintSize="134,61" sap2010:WorkflowViewState.IdRef="State_6" IsFinal="True">
+                            <State x:Name="__ReferenceID2" DisplayName="Final State" sap:VirtualizedContainerService.HintSize="422,365" sap2010:WorkflowViewState.IdRef="State_6" IsFinal="True">
                               <State.Entry>
-                                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_6" Text="[&quot;Your birthday is &quot;+dayOfBirth.ToString+&quot;/&quot;+mmOfBirth.ToString+&quot;/&quot;+yyOfBirth.ToString]" />
+                                <Sequence sap:VirtualizedContainerService.HintSize="376,252" sap2010:WorkflowViewState.IdRef="Sequence_1">
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                  <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_6" Text="[&quot;Your birthday is &quot;+dayOfBirth.ToString+&quot;/&quot;+mmOfBirth.ToString+&quot;/&quot;+yyOfBirth.ToString]" />
+                                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="Process Done" />
+                                </Sequence>
                               </State.Entry>
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -215,9 +213,7 @@
                           <Transition.To>
                             <x:Reference>__ReferenceID2</x:Reference>
                           </Transition.To>
-                          <Transition.Condition>
-                            <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="retryCtr&gt;3" />
-                          </Transition.Condition>
+                          <Transition.Condition>[retryCtr&gt;3]</Transition.Condition>
                         </Transition>
                       </State.Transitions>
                     </State>
@@ -244,9 +240,7 @@
                       </Assign.Value>
                     </Assign>
                   </Transition.Action>
-                  <Transition.Condition>
-                    <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="mmOfBirth&lt;0 And mmOfBirth&gt;=12" />
-                  </Transition.Condition>
+                  <Transition.Condition>[mmOfBirth&lt;0 And mmOfBirth&gt;=12]</Transition.Condition>
                 </Transition>
                 <Transition DisplayName="Exceeded" sap:VirtualizedContainerService.HintSize="450,505" sap2010:WorkflowViewState.IdRef="Transition_12">
                   <sap:WorkflowViewStateService.ViewState>
@@ -262,9 +256,7 @@
                   <Transition.Action>
                     <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_5" Text="[&quot;Retry exceede at Month input&quot;]" />
                   </Transition.Action>
-                  <Transition.Condition>
-                    <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="retryCtr&gt;3" />
-                  </Transition.Condition>
+                  <Transition.Condition>[retryCtr&gt;3]</Transition.Condition>
                 </Transition>
               </State.Transitions>
             </State>
@@ -284,9 +276,7 @@
           <Transition.Action>
             <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_4" Text="[&quot;Retry exceeded at day input&quot;]" />
           </Transition.Action>
-          <Transition.Condition>
-            <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="retryCtr&gt;3" />
-          </Transition.Condition>
+          <Transition.Condition>[retryCtr&gt;3]</Transition.Condition>
         </Transition>
       </State.Transitions>
     </State>
